@@ -14,9 +14,6 @@
 
 
 # python libraries
-import os
-import sys
-
 from bert_serving.client import BertClient
 
 

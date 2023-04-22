@@ -18,13 +18,38 @@ import os
 import sys
 
 from recurrentshop import LSTMCell, RecurrentSequential
+
 from .cells import LSTMDecoderCell, AttentionDecoderCell
+
 from tensorflow.keras.models import Sequential, Model, Dropout, Input
 from tensorflow.keras import layers
 
+import tensorflow as tf
 
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]
+
+
+class Seq2SeqEncoder(Encoder):
+    """
+    RNN encoder for sequence to sequence learning
+    """
+    def __init__(self, vocab_size, embed_size, num_hiddens, num_layers, dropout = 0, **kwargs) -> None:
+        super(Seq2SeqEncoder, self).__init__(**kwargs)
+        # Embedding layer
+        self.embedding = nn.Embedding(vocab_size, embed_size)
+        self.rnn = nn.GRU(
+            embed_size,
+            num_hiddens,
+            num_layers,
+            dropout = dropout,
+        )
+    
+    def forward(self, X, *args):
+        X = self.embedding(X)  # (batch_size, num_steps, embed_size)
+        X = X.permute(1, 0, 2)  # first axis corresponds to time steps
+        output, state = self.rnn(X)
+        return output, state
 
 
 def SimpleSeq2Seq(output_dim, output_length, hidden_dim=None, input_shape=None,

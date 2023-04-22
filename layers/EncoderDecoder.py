@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-
 # ***************************************************
-# * File        : encoder_decoder.py
+# * File        : EncoderDecoder.py
 # * Author      : Zhefeng Wang
 # * Email       : wangzhefengr@163.com
 # * Date        : 2023-03-27
@@ -12,14 +11,8 @@
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
 
-
 # python libraries
-import os
-import sys
-
-import torch
 from torch import nn
-
 
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]
@@ -64,7 +57,6 @@ class EncoderDecoder(nn.Module):
         enc_outputs = self.encoder(enc_X, *args)
         dec_state = self.decoder.init_state(enc_outputs, *args)
         return self.decoder(dec_X, dec_state)
-
 
 
 
