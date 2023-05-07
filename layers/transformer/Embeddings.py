@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # ***************************************************
-# * File        : layer_clones.py
+# * File        : Embeddings.py
 # * Author      : Zhefeng Wang
 # * Email       : wangzhefengr@163.com
 # * Date        : 2023-05-07
-# * Version     : 0.1.050719
+# * Version     : 0.1.050721
 # * Description : description
 # * Link        : link
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
@@ -18,7 +18,7 @@ import sys
 ROOT = os.getcwd()
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
-import copy
+import math
 
 import torch.nn as nn
 
@@ -26,14 +26,16 @@ import torch.nn as nn
 LOGGING_LABEL = __file__.split('/')[-1][:-3]
 
 
-def clones(module, N):
-    """
-    Product N identical layers.
-    """
-    return nn.ModuleList([
-        copy.deepcopy(module) 
-        for _ in range(N)
-    ])
+class Embeddings(nn.Module):
+    
+    def __init__(self, d_model, vocab) -> None:
+        super(Embeddings, self).__init__()
+        self.lut = nn.Embedding(vocab, d_model)
+        self.d_model = d_model
+
+    def forward(self, x):
+        out = self.lut(x) * math.sqrt(self.d_model)
+        return out
 
 
 

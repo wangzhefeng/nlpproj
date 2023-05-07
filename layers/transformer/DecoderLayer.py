@@ -19,10 +19,9 @@ ROOT = os.getcwd()
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
-import torch
 import torch.nn as nn
 
-from layer_clones import clones
+from utils_func import clones
 from LayerNorm import LayerNorm
 from SublayerConnection import SublayerConnection
 

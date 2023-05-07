@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # ***************************************************
-# * File        : SublayerConnection.py
+# * File        : PositionwiseFeedForward.py
 # * Author      : Zhefeng Wang
 # * Email       : wangzhefengr@163.com
 # * Date        : 2023-05-07
-# * Version     : 0.1.050719
+# * Version     : 0.1.050721
 # * Description : description
 # * Link        : link
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
@@ -21,27 +21,24 @@ if str(ROOT) not in sys.path:
 
 import torch.nn as nn
 
-from LayerNorm import LayerNorm
-
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]
 
 
-class SublayerConnection(nn.Module):
+class PositionwiseFeedForward(nn.Module):
     """
-    A residual connection folled by a layer norm.
+    Implements Feed-Forward Networks
+    FFN(x) = max(0, xW_{1} + b_{1})W_{2} + b_{2}
     """
 
-    def __init__(self, size,  dropout):
-        super(SublayerConnection, self).__init__()
-        self.norm = LayerNorm(size)
+    def __init__(self, d_model, d_ff, dropout = 0.1) -> None:
+        super(PositionwiseFeedForward, self).__init__()
+        self.w_1 = nn.Linear(d_model, d_ff)
+        self.w_2 = nn.Linear(d_ff, d_model)
         self.dropout = nn.Dropout(dropout)
     
-    def forwad(self, x, sublayer):
-        """
-        Apply residual connection to any sublayer with the same size.
-        """
-        return x + self.dropout(sublayer(self.norm(x)))
+    def forward(self, x):
+        return self.w_2(self.dropout(self.w_1(x).relu()))
 
 
 

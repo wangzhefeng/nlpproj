@@ -15,7 +15,7 @@
 import os
 from torch import nn
 
-from layers.BERTEncoder import BERTEncoder, MaskLM, NextSentencePred
+from layers.transforme_rdl2.BERTEncoder import BERTEncoder, MaskLM, NextSentencePred
 
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]

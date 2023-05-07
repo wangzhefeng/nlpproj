@@ -27,20 +27,38 @@ class TransformerEncoder(Encoder):
     """
     Transformer encoder.
     """
-    def __init__(self, vocab_size, key_size, query_size, value_size,
-                 num_hiddens, norm_shape, ffn_num_input, ffn_num_hiddens,
-                 num_heads, num_layers, dropout, use_bias=False, **kwargs):
+    def __init__(self, 
+                 vocab_size, 
+                 key_size, 
+                 query_size, 
+                 value_size,
+                 num_hiddens, 
+                 norm_shape, 
+                 ffn_num_input, 
+                 ffn_num_hiddens,
+                 num_heads, 
+                 num_layers, 
+                 dropout, 
+                 use_bias = False, 
+                 **kwargs):
         super(TransformerEncoder, self).__init__(**kwargs)
         self.num_hiddens = num_hiddens
         self.embedding = nn.Embedding(vocab_size, num_hiddens)
         self.pos_encoding = PositionalEncoding(num_hiddens, dropout)
         self.blks = nn.Sequential()
         for i in range(num_layers):
-            self.blks.add_module("block"+str(i),
+            self.blks.add_module("block" + str(i),
                 EncoderBlock(
-                    key_size, query_size, value_size, num_hiddens,
-                    norm_shape, ffn_num_input, ffn_num_hiddens,
-                    num_heads, dropout, use_bias
+                    key_size, 
+                    query_size, 
+                    value_size, 
+                    num_hiddens,
+                    norm_shape, 
+                    ffn_num_input, 
+                    ffn_num_hiddens,
+                    num_heads, 
+                    dropout, 
+                    use_bias,
                 )
             )
 
@@ -52,9 +70,9 @@ class TransformerEncoder(Encoder):
         self.attention_weights = [None] * len(self.blks)
         for i, blk in enumerate(self.blks):
             X = blk(X, valid_lens)
-            self.attention_weights[
-                i] = blk.attention.attention.attention_weights
+            self.attention_weights[i] = blk.attention.attention.attention_weights
         return X
+
 
 
 
