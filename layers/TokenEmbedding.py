@@ -27,7 +27,7 @@ DATA_HUB = dict()
 DATA_URL = 'http://d2l-data.s3-accelerate.amazonaws.com/'
 
 
-def download(name, cache_dir=os.path.join('..', 'data')):
+def download(name, cache_dir = os.path.join('..', 'data')):
     """
     Download a file inserted into DATA_HUB, return the local filename.
     """
@@ -49,10 +49,11 @@ def download(name, cache_dir=os.path.join('..', 'data')):
     r = requests.get(url, stream=True, verify=True)
     with open(fname, 'wb') as f:
         f.write(r.content)
+
     return fname
 
 
-def download_extract(name, folder=None):
+def download_extract(name, folder = None):
     """
     Download and extract a zip/tar file.
     """
@@ -66,24 +67,39 @@ def download_extract(name, folder=None):
     else:
         assert False, 'Only zip/tar files can be extracted.'
     fp.extractall(base_dir)
+
     return os.path.join(base_dir, folder) if folder else data_dir
 
 
 class TokenEmbedding:
-    """Token Embedding."""
+    """
+    Token Embedding.
+    """
     def __init__(self, embedding_name):
-        """Defined in :numref:`sec_synonyms`"""
-        self.idx_to_token, self.idx_to_vec = self._load_embedding(
-            embedding_name)
+        """
+        Defined in :numref:`sec_synonyms`
+        """
+        self.idx_to_token, self.idx_to_vec = self._load_embedding(embedding_name)
         self.unknown_idx = 0
-        self.token_to_idx = {token: idx for idx, token in
-                             enumerate(self.idx_to_token)}
+        self.token_to_idx = {
+            token: idx for idx, token in
+            enumerate(self.idx_to_token)
+        }
 
     def _load_embedding(self, embedding_name):
-        idx_to_token, idx_to_vec = ['<unk>'], []
-        data_dir = download_extract(embedding_name)
+        """
         # GloVe website: https://nlp.stanford.edu/projects/glove/
         # fastText website: https://fasttext.cc/
+
+        Args:
+            embedding_name (_type_): _description_
+
+        Returns:
+            _type_: _description_
+        """
+        idx_to_token, idx_to_vec = ['<unk>'], []
+        data_dir = download_extract(embedding_name)
+
         with open(os.path.join(data_dir, 'vec.txt'), 'r') as f:
             for line in f:
                 elems = line.rstrip().split(' ')
@@ -96,8 +112,10 @@ class TokenEmbedding:
         return idx_to_token, torch.tensor(idx_to_vec)
 
     def __getitem__(self, tokens):
-        indices = [self.token_to_idx.get(token, self.unknown_idx)
-                   for token in tokens]
+        indices = [
+            self.token_to_idx.get(token, self.unknown_idx)
+            for token in tokens
+        ]
         vecs = self.idx_to_vec[torch.tensor(indices)]
         return vecs
 

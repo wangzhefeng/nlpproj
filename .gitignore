@@ -130,7 +130,10 @@ dmypy.json
 
 # vscode
 .vscode/
+
+# files
 *.npy
 *.h5
 *.txt
 *.csv
+.vector_cache/
