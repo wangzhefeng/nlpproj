@@ -19,13 +19,12 @@ ROOT = os.getcwd()
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 import math
-from copy import deepcopy
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from utils_func import clones
+from utils.utils_transformer import clones
 
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]
@@ -91,12 +90,10 @@ class MultiHeadAttention(nn.Module):
     def forward(self, query, key, value, mask = None): 
         # batches
         num_batches = query.size(0)
-        
         # mask
         if mask is not None:
             # same mask applied to all h heads.
             mask = mask.unsqueeze(1)
-        
         # 1) Do all the linear projections in batch from d_model => h x d_k 
         query, key, value = [
             linear(x) \
@@ -111,15 +108,12 @@ class MultiHeadAttention(nn.Module):
             .transpose(1, 2) \
             .contiguous() \
             .view(num_batches, -1, self.h * self.d_k)
-        
         # clear memory
         del query
         del key
         del value
-
         # Linear
         out = self.linears[-1](x)
-
         return out
 
 

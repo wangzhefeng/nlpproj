@@ -21,7 +21,7 @@ if str(ROOT) not in sys.path:
 
 import torch.nn as nn
 
-from LayerNorm import LayerNorm
+from layers_transformer.LayerNorm import LayerNorm
 
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]

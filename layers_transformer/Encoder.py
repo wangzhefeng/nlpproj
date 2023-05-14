@@ -21,9 +21,9 @@ if str(ROOT) not in sys.path:
 
 import torch.nn as nn
 
-from utils_func import clones
-from LayerNorm import LayerNorm
-from SublayerConnection import SublayerConnection
+from layers_transformer.LayerNorm import LayerNorm
+from layers_transformer.SublayerConnection import SublayerConnection
+from utils.utils_transformer import clones
 
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]
@@ -60,10 +60,10 @@ class EncoderLayer(nn.Module):
 
     def __init__(self, size, self_attn, feed_forward, dropout):
         super(EncoderLayer, self).__init__()
+        self.size = size
         self.self_attn = self_attn
         self.feed_forward = feed_forward
         self.sublayer = clones(SublayerConnection(size, dropout), 2)
-        self.size = size
 
     def forward(self, x, mask):
         """

@@ -32,7 +32,6 @@ class PositionalEncoding(nn.Module):
     def __init__(self, d_model, dropout, max_len = 5000) -> None:
         super(PositionalEncoding, self).__init__()
         self.dropout = nn.Dropout(p = dropout)
-
         # compute the positional encoding once in log space
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len).unsqueeze(1)

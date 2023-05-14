@@ -21,9 +21,9 @@ if str(ROOT) not in sys.path:
 
 import torch.nn as nn
 
-from utils_func import clones
-from LayerNorm import LayerNorm
-from SublayerConnection import SublayerConnection
+from layers_transformer.LayerNorm import LayerNorm
+from layers_transformer.SublayerConnection import SublayerConnection
+from utils.utils_transformer import clones
 
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]
