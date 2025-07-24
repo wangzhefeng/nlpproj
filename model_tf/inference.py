@@ -21,7 +21,7 @@ if str(ROOT) not in sys.path:
 
 import torch
 
-from transformer_torch import transformer
+from model_transformer.train import transformer
 from utils.utils_transformer import (
     subsequent_mask, 
     show_example
