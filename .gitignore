@@ -137,3 +137,12 @@ dmypy.json
 *.txt
 *.csv
 .vector_cache/
+
+
+# custom
+utils/
+.DS_Store
+dataset/
+downloaded_models/
+logs/
+saved_results/
