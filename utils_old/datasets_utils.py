@@ -19,7 +19,7 @@ import sys
 
 from pprint import pprint
 from datasets import list_datasets, load_dataset
-import evaluate
+# import evaluate
 
 # global variable
 LOGGING_LABEL = __file__.split('/')[-1][:-3]

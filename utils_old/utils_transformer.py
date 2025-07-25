@@ -14,7 +14,7 @@
 # python libraries
 import os
 import sys
-
+import copy
 import torch
 import torch.nn as nn
 
@@ -85,7 +85,7 @@ def subsequent_mask(size):
 def main():
     import pandas as pd
     import altair as alt
-    from utils.utils_transformer import show_example
+    from utils_old.utils_transformer import show_example
 
     def example_mask():
         LS_data = pd.concat([
