@@ -55,7 +55,7 @@ class DouBanSpider:
         categroies = categroyLinks
         try:
             for link in categroies:
-                print("正在爬取:" + link)
+                print("正在爬取：" + link)
                 bookList = []
                 response = requests.get(link)
                 soup = bs4.BeautifulSoup(response.text, 'lxml')

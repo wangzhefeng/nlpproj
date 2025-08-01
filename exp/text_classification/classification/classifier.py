@@ -8,7 +8,7 @@ from sklearn.cross_validation import train_test_split
 def get_data():
     '''
     获取数据
-    :return: 文本数据, 对应的labels
+    :return: 文本数据，对应的labels
     '''
     with open("data/ham_data.txt", encoding="utf8") as ham_f, open("data/spam_data.txt", encoding="utf8") as spam_f:
         ham_data = ham_f.readlines()
@@ -30,7 +30,7 @@ def prepare_datasets(corpus, labels, test_data_proportion=0.3):
     :param corpus: 文本数据
     :param labels: label数据
     :param test_data_proportion:测试数据占比 
-    :return: 训练数据,测试数据, 训练label,测试label
+    :return: 训练数据,测试数据，训练label,测试label
     '''
     train_X, test_X, train_Y, test_Y = train_test_split(corpus, labels,
                                                         test_size=test_data_proportion, random_state=42)

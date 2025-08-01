@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 # ***************************************************
 # * File        : TextClassifier.py
 # * Author      : Zhefeng Wang
@@ -12,14 +11,14 @@
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
 
-
 # python libraries
-import os
 import sys
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
 
-import torch
 from torch import nn
-
 
 # global variable
 LOGGING_LABEL = Path(__file__).name[:-3]
@@ -29,6 +28,7 @@ class TextClassifier(nn.Module):
 
     def __init__(self, vocab) -> None:
         super(TextClassifier, self).__init__()
+        
         self.linear1 = nn.Sequential(
             nn.Linear(len(vocab), 128),
             nn.ReLU(),

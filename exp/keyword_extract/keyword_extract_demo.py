@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import os
 import math
+import functools
+
 import numpy as np
 import jieba
 import jieba.posseg as psg
-from gensim import corpora, models
 from jieba.analyse import textrank
-import functools
+from gensim import corpora, models
 
 
 """
@@ -24,7 +25,7 @@ import functools
    - 2.根据停用词表，过滤干扰词
    - 3.根据训练好的算法提取关键词
 
-https://github.com/nlpinaction/code/tree/master/chapter-5
+https://github.com/nlpinaction/learning-nlp/blob/master/chapter-5/KeywordExtract.py
 """
 
 project_path = os.path.abspath(".")
