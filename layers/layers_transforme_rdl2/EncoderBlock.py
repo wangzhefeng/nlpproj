@@ -16,7 +16,7 @@ from torch import nn
 from MultiHeadAttention import MultiHeadAttention
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 class PositionWiseFFN(nn.Module):

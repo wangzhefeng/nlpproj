@@ -1,10 +1,39 @@
+# -*- coding: utf-8 -*-
+
+# ***************************************************
+# * File        : TFIDF.py
+# * Author      : Zhefeng Wang
+# * Email       : zfwang7@gmail.com
+# * Date        : 2025-08-01
+# * Version     : 1.0.080110
+# * Description : description
+# * Link        : link
+# * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
+# ***************************************************
+
+__all__ = []
+
+# python libraries
+import os
+import sys
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
+import re
+import math
+import warnings
+warnings.filterwarnings("ignore")
+
 import numpy as np
 import pandas as pd
-import math
 import jieba
 import jieba.analyse
-import re
 
+# global variable
+LOGGING_LABEL = Path(__file__).name[:-3]
+os.environ['LOG_NAME'] = LOGGING_LABEL
+from utils.log_util import logger
 
 
 def word_segment(file_path_before, file_path_after, stop_word_file, dic_file):
@@ -40,7 +69,6 @@ def word_segment(file_path_before, file_path_after, stop_word_file, dic_file):
             f1.write("\n")
 
     return words_list
-
 
 
 def doc2tfidf_matrix(file_path_before, words_list):
@@ -81,11 +109,6 @@ def doc2tfidf_matrix(file_path_before, words_list):
     tfidf = pd.DataFrame(tfidf,columns=vocab)
     return tfidf
 
-
-import numpy as np
-import pandas as pd
-import math
-import jieba
 
 def doc2tfidf_matrix():
     # 读取待编码的文件
@@ -128,7 +151,6 @@ def doc2tfidf_matrix():
     return tfidf
 
 
-
 file_path_before = "C:/Users/asus/Desktop/goodat.txt"
 file_path_after = "C:/Users/asus/Desktop/word segment.txt"
 stop_word_file = "C:/Users/asus/Desktop/stop_word.txt"
@@ -142,3 +164,14 @@ for i in range(0,50):
     for i in range(0,10):
         goodat = goodat + row.index[i] + "/"
     print(goodat)
+
+
+
+
+
+# 测试代码 main 函数
+def main():
+    pass
+
+if __name__ == "__main__":
+    main()

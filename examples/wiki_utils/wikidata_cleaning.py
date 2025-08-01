@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 # ***************************************************
 # * File        : wikidata_cleaning.py
 # * Author      : Zhefeng Wang
@@ -12,15 +11,17 @@
 # * Requirement : python wikidata_cleaning.py input_file > output_file
 # ***************************************************
 
-
 # python libraries
 import os
 import sys
-
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
 import re
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 def remove_empty_paired_punc(in_str):

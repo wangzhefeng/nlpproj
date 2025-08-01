@@ -25,7 +25,7 @@ import torch
 from torch.optim.lr_scheduler import LambdaLR
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 def rate(step, model_size, factor, warmup):

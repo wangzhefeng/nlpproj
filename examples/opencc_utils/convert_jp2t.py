@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 # ***************************************************
 # * File        : convert_jp2t.py
 # * Author      : Zhefeng Wang
@@ -12,15 +11,18 @@
 # * Requirement : python convert_jp2t.py input_file > output_file
 # ***************************************************
 
-
 # python libraries
 import os
 import sys
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
 
 import opencc
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 converter = opencc.OpenCC("jp2t.json")  # 载入繁简体转换配置文件

@@ -25,7 +25,7 @@ from data import train_data, test_data
 from rnn import RNN
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 # ------------------------------

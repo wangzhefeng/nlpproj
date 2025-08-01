@@ -27,7 +27,7 @@ import torch.nn.functional as F
 from utils.utils_transformer import clones
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 class ScaledDotProductAttention(nn.Module):

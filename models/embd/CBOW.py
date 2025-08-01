@@ -1,28 +1,38 @@
 # -*- coding: utf-8 -*-
 
-
 # ***************************************************
-# * File        : cbow.py
+# * File        : CBOW.py
 # * Author      : Zhefeng Wang
-# * Email       : wangzhefengr@163.com
-# * Date        : 2023-03-27
-# * Version     : 0.1.032722
+# * Email       : zfwang7@gmail.com
+# * Date        : 2025-08-01
+# * Version     : 1.0.080110
 # * Description : description
 # * Link        : link
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
 
+__all__ = []
 
 # python libraries
 import os
 import sys
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
+import warnings
+warnings.filterwarnings("ignore")
 
-import torch
 from torch import nn
 
-
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
+os.environ['LOG_NAME'] = LOGGING_LABEL
+from utils.log_util import logger
+
+
+EMBED_DIMENSION = 512
+EMBED_MAX_NORM = 1
 
 
 class CBOW(nn.Module):
@@ -47,10 +57,6 @@ class CBOW(nn.Module):
         x = x.mean(axis = 1)
         x = self.linear(x)
         return x
-
-
-
-
 
 
 

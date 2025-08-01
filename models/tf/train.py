@@ -49,7 +49,7 @@ from layers_transformer.Generator import Generator
 from layers_transformer.Embeddings import Embeddings
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 def transformer(src_vocab, target_vocab, N = 6, d_model = 512, d_ff = 2048, h = 8, dropout = 0.1):

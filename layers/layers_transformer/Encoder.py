@@ -26,7 +26,7 @@ from layers_transformer.SublayerConnection import SublayerConnection
 from utils.utils_transformer import clones
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 class Encoder(nn.Module):

@@ -12,18 +12,19 @@
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
 
+import os
+import sys
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
 
-# python libraries
-import os
-import os
 import numpy as np
 import pandas as pd
 import jieba
-import config
-
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 def word2onthot(file_path):
@@ -51,7 +52,8 @@ def word2onthot(file_path):
                 pos = vocab.index(word)
                 onehot[i][pos] = 1
     onehot = pd.DataFrame(onehot, columns = vocab)
-    onehot.to_csv(os.path.join(config.data_dir, "onehot.csv"))
+    # onehot.to_csv(os.path.join(config.data_dir, "onehot.csv"))
+    
     return onehot
 
 
@@ -59,7 +61,10 @@ def word2onthot(file_path):
 
 # 测试代码 main 函数
 def main():
-    corpus = os.path.join(config.data_dir, "corpus.txt")
+    # curpus
+    data_dir = None
+
+    corpus = os.path.join(data_dir, "corpus.txt")
     onehot = word2onthot(corpus)
     print(onehot)
 

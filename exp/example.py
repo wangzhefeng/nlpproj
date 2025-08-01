@@ -24,7 +24,7 @@ import torch
 from exp_transformer.Batch import Batch
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 def data_gen(V, batch_size, num_batches):

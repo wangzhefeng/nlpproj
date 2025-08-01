@@ -18,7 +18,7 @@ from torch import nn
 from layers.transforme_rdl2.BERTEncoder import BERTEncoder, MaskLM, NextSentencePred
 
 # global variable
-LOGGING_LABEL = __file__.split('/')[-1][:-3]
+LOGGING_LABEL = Path(__file__).name[:-3]
 
 
 class BERTModel(nn.Module):
