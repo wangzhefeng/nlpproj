@@ -1,41 +1,42 @@
 # -*- coding: utf-8 -*-
 
 # ***************************************************
-# * File        : bert_use.py
+# * File        : Embeddings.py
 # * Author      : Zhefeng Wang
 # * Email       : wangzhefengr@163.com
-# * Date        : 2023-03-23
-# * Version     : 0.1.032308
+# * Date        : 2023-05-07
+# * Version     : 0.1.050721
 # * Description : description
-# * Link        : https://mp.weixin.qq.com/s/IhUhAOD8HmCXxhg7CpFhUw
+# * Link        : link
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
 
 # python libraries
-import os
 import sys
 from pathlib import Path
 ROOT = str(Path.cwd())
 if ROOT not in sys.path:
     sys.path.append(ROOT)
+import math
 
-from bert_serving.client import BertClient
+import torch.nn as nn
 
 # global variable
 LOGGING_LABEL = Path(__file__).name[:-3]
 
 
-bc = BertClient(
-    ip = "localhost", 
-    check_version = False, 
-    check_length = False
-)
-vec = bc.encode(["学习"])
-print(vec)
+class Embeddings(nn.Module):
+    
+    def __init__(self, d_model, vocab) -> None:
+        super(Embeddings, self).__init__()
 
+        self.lut = nn.Embedding(vocab, d_model)
+        self.d_model = d_model
 
+    def forward(self, x):
+        out = self.lut(x) * math.sqrt(self.d_model)
 
-
+        return out
 
 
 

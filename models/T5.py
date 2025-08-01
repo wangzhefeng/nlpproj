@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 
 # ***************************************************
-# * File        : bert_use.py
+# * File        : T5.py
 # * Author      : Zhefeng Wang
-# * Email       : wangzhefengr@163.com
-# * Date        : 2023-03-23
-# * Version     : 0.1.032308
+# * Email       : zfwang7@gmail.com
+# * Date        : 2025-08-01
+# * Version     : 1.0.080111
 # * Description : description
-# * Link        : https://mp.weixin.qq.com/s/IhUhAOD8HmCXxhg7CpFhUw
+# * Link        : link
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
+
+__all__ = []
 
 # python libraries
 import os
@@ -18,21 +20,13 @@ from pathlib import Path
 ROOT = str(Path.cwd())
 if ROOT not in sys.path:
     sys.path.append(ROOT)
-
-from bert_serving.client import BertClient
+import warnings
+warnings.filterwarnings("ignore")
 
 # global variable
 LOGGING_LABEL = Path(__file__).name[:-3]
-
-
-bc = BertClient(
-    ip = "localhost", 
-    check_version = False, 
-    check_length = False
-)
-vec = bc.encode(["学习"])
-print(vec)
-
+os.environ['LOG_NAME'] = LOGGING_LABEL
+from utils.log_util import logger
 
 
 

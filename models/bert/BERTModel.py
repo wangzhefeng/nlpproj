@@ -12,10 +12,15 @@
 # ***************************************************
 
 # python libraries
-import os
+import sys
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
+
 from torch import nn
 
-from layers.transforme_rdl2.BERTEncoder import BERTEncoder, MaskLM, NextSentencePred
+from layers.bert.BERTEncoder import BERTEncoder, MaskLM, NextSentencePred
 
 # global variable
 LOGGING_LABEL = Path(__file__).name[:-3]

@@ -1,41 +1,45 @@
 # -*- coding: utf-8 -*-
 
 # ***************************************************
-# * File        : bert_use.py
+# * File        : Generator.py
 # * Author      : Zhefeng Wang
 # * Email       : wangzhefengr@163.com
-# * Date        : 2023-03-23
-# * Version     : 0.1.032308
+# * Date        : 2023-05-07
+# * Version     : 0.1.050718
 # * Description : description
-# * Link        : https://mp.weixin.qq.com/s/IhUhAOD8HmCXxhg7CpFhUw
+# * Link        : link
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
 
 # python libraries
-import os
 import sys
 from pathlib import Path
 ROOT = str(Path.cwd())
 if ROOT not in sys.path:
     sys.path.append(ROOT)
 
-from bert_serving.client import BertClient
+import torch.nn as nn
+import torch.nn.functional as F
 
 # global variable
 LOGGING_LABEL = Path(__file__).name[:-3]
 
 
-bc = BertClient(
-    ip = "localhost", 
-    check_version = False, 
-    check_length = False
-)
-vec = bc.encode(["学习"])
-print(vec)
+class Generator(nn.Module):
+    """
+    Define standard linear + softmax generation step.
+    """
 
+    def __init__(self, d_model, vocab) -> None:
+        super(Generator, self).__init__()
 
+        self.proj = nn.Linear(d_model, vocab)
+    
+    def forward(self, x):
+        x = self.proj(x)
+        output = F.log_softmax(x, dim = -1)
 
-
+        return output
 
 
 

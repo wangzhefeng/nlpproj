@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 # ***************************************************
 # * File        : gru.py
 # * Author      : Zhefeng Wang
@@ -12,18 +11,21 @@
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
 
-
 # python libraries
-import os
 import sys
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
 
 import torch
 from torch import nn
-from d2l import torch as d2l
 
+import utils.d2l_torch as d2l
 
 # global variable
 LOGGING_LABEL = Path(__file__).name[:-3]
+# params
 batch_size = 32
 num_steps = 35
 

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 # ***************************************************
 # * File        : rnn.py
 # * Author      : Zhefeng Wang
@@ -12,24 +11,25 @@
 # * Requirement : 相关模块版本需求(例如: numpy >= 2.1.0)
 # ***************************************************
 
-
 # python libraries
 import os
 import sys
-_path = os.path.abspath(os.path.dirname(__file__))
-if os.path.join(_path, "..") not in sys.path:
-    sys.path.append(os.path.join(_path, ".."))
+from pathlib import Path
+ROOT = str(Path.cwd())
+if ROOT not in sys.path:
+    sys.path.append(ROOT)
 
-import numpy as np
 import torch
 import torch.nn as nn
 from torchvision import transforms
 
-from cv_data.MNIST import get_dataset, get_dataloader
+from utils.device import device_setting
 
+from cv_data.MNIST import get_dataset, get_dataloader
 
 # global variable
 LOGGING_LABEL = Path(__file__).name[:-3]
+# params
 batch_size = 64
 learning_rate = 0.01
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
